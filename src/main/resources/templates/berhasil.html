@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran Berhasil</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="success-wrap">
+    <div class="success-card">
+        <div class="success-mark">✓</div>
+        <h1>Pendaftaran Berhasil!</h1>
+        <p th:if="${hasil != null}">Terima kasih, <strong th:text="${hasil.namaLengkap}">Nama Pendaftar</strong>. Formulir simulasi kamu berhasil dikirim.</p>
+        <p th:if="${hasil == null}">Belum ada hasil pendaftaran pada sesi ini. Silakan isi formulir terlebih dahulu.</p>
+        <div class="registration-number" th:if="${hasil != null}">
+            <span>Nomor Registrasi Simulasi</span>
+            <strong th:text="${hasil.nomorRegistrasi}">PMB-123456</strong>
+            <small>Program studi: <span th:text="${hasil.programStudi}">Sistem Informasi</span></small>
+        </div>
+        <p class="privacy-note">Nomor registrasi ini hanya untuk demonstrasi dan tidak tersimpan permanen.</p>
+        <a class="submit-button link-button" th:href="@{/}">Kembali ke Formulir</a>
+    </div>
+</div>
+</body>
+</html>

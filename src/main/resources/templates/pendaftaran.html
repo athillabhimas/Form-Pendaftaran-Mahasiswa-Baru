@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Pendaftaran | Universitas Brawijaya</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="page-shell">
+    <header class="topbar">
+        <a class="back-link" href="#" aria-label="Kembali" onclick="history.back(); return false;">←</a>
+        <div class="brand-mark">UB</div>
+        <div class="brand-text">
+            <span>Universitas Brawijaya</span>
+            <strong>Formulir Pendaftaran</strong>
+        </div>
+        <div class="profile-icon" aria-hidden="true">♟</div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Registrasi Mahasiswa Baru</h1>
+            <p>Selamat datang di portal pendaftaran Universitas Brawijaya. Isi seluruh data yang diperlukan.</p>
+        </section>
+
+        <form th:action="@{/daftar}" th:object="${formPendaftaran}" method="post"
+              enctype="multipart/form-data" novalidate>
+            <section class="form-section">
+                <div class="section-heading">
+                    <span class="section-icon">▣</span>
+                    <div>
+                        <h2>Data Pribadi</h2>
+                        <p>Sesuai kartu identitas atau ijazah kelulusan</p>
+                    </div>
+                    <span class="required-note">Wajib Diisi</span>
+                </div>
+
+                <div class="fields-card">
+                    <div class="field">
+                        <label for="namaLengkap">Nama Lengkap</label>
+                        <input id="namaLengkap" type="text" th:field="*{namaLengkap}"
+                               placeholder="Contoh: Athilla Faveurdi Bhimas" autocomplete="name">
+                        <small class="error" th:errors="*{namaLengkap}"></small>
+                    </div>
+
+                    <div class="field">
+                        <label for="nik">Nomor Induk Kependudukan (NIK)</label>
+                        <input id="nik" type="text" th:field="*{nik}" placeholder="351550xxxxxxxxxx"
+                               inputmode="numeric" maxlength="16">
+                        <small class="hint">Masukkan 16 digit angka.</small>
+                        <small class="error" th:errors="*{nik}"></small>
+                    </div>
+
+                    <div class="field">
+                        <label for="tempatLahir">Tempat Lahir</label>
+                        <input id="tempatLahir" type="text" th:field="*{tempatLahir}" placeholder="Kota / Kabupaten">
+                        <small class="error" th:errors="*{tempatLahir}"></small>
+                    </div>
+
+                    <div class="field">
+                        <label for="tanggalLahir">Tanggal Lahir</label>
+                        <input id="tanggalLahir" type="date" th:field="*{tanggalLahir}">
+                        <small class="error" th:errors="*{tanggalLahir}"></small>
+                    </div>
+
+                    <div class="field">
+                        <label>Jenis Kelamin</label>
+                        <div class="gender-options">
+                            <label class="gender-option">
+                                <input type="radio" th:field="*{jenisKelamin}" value="Laki-laki">
+                                <span>♂ &nbsp; Laki-laki</span>
+                            </label>
+                            <label class="gender-option">
+                                <input type="radio" th:field="*{jenisKelamin}" value="Perempuan">
+                                <span>♀ &nbsp; Perempuan</span>
+                            </label>
+                        </div>
+                        <small class="error" th:errors="*{jenisKelamin}"></small>
+                    </div>
+
+                    <div class="field">
+                        <label for="alamatLengkap">Alamat Lengkap</label>
+                        <textarea id="alamatLengkap" th:field="*{alamatLengkap}" rows="3"
+                                  placeholder="Jalan, RT/RW, Kelurahan, Kecamatan, Kota/Kabupaten, Kode Pos"></textarea>
+                        <small class="error" th:errors="*{alamatLengkap}"></small>
+                    </div>
+
+                    <div class="field">
+                        <label for="nomorTelepon">Nomor Telepon Aktif</label>
+                        <div class="phone-input">
+                            <span>+62</span>
+                            <input id="nomorTelepon" type="tel" th:field="*{nomorTelepon}"
+                                   placeholder="81234567890" autocomplete="tel">
+                        </div>
+                        <small class="error" th:errors="*{nomorTelepon}"></small>
+                    </div>
+
+                    <div class="field">
+                        <label for="email">Alamat Email Aktif</label>
+                        <input id="email" type="email" th:field="*{email}" placeholder="nama@gmail.com" autocomplete="email">
+                        <small class="error" th:errors="*{email}"></small>
+                    </div>
+
+                    <div class="field">
+                        <label for="asalSekolah">Asal Sekolah (SMA / SMK / MA / Sederajat)</label>
+                        <input id="asalSekolah" type="text" th:field="*{asalSekolah}" placeholder="Ketik nama sekolah asal">
+                        <small class="error" th:errors="*{asalSekolah}"></small>
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="section-heading">
+                    <span class="section-icon">♧</span>
+                    <div>
+                        <h2>Pilihan Studi</h2>
+                    </div>
+                    <span class="required-note">Wajib Diisi</span>
+                </div>
+                <div class="fields-card">
+                    <div class="field">
+                        <label for="programStudi">Program Studi Pilihan</label>
+                        <select id="programStudi" th:field="*{programStudi}">
+                            <option value="">Pilih Program Studi Utama</option>
+                            <option value="Sistem Informasi">Sistem Informasi</option>
+                            <option value="Teknik Informatika">Teknik Informatika</option>
+                            <option value="Pendidikan Dokter">Pendidikan Dokter</option>
+                            <option value="Ilmu Hukum">Ilmu Hukum</option>
+                            <option value="Manajemen">Manajemen</option>
+                            <option value="Akuntansi">Akuntansi</option>
+                        </select>
+                        <small class="error" th:errors="*{programStudi}"></small>
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="section-heading">
+                    <span class="section-icon">♧</span>
+                    <div>
+                        <h2>Tempat Pengumpulan &amp; Unggah Berkas</h2>
+                        <p>Format PDF (Maksimal 2MB per berkas)</p>
+                    </div>
+                    <span class="required-note">Wajib Diisi</span>
+                </div>
+                <div class="upload-grid">
+                    <div class="upload-card">
+                        <div class="upload-title"><strong>Ijazah</strong><span>PDF</span></div>
+                        <label class="upload-area" for="ijazah">
+                            <span class="upload-icon">⇧</span>
+                            <strong id="ijazah-name">Unggah Berkas Ijazah</strong>
+                            <small>Maksimal ukuran 2MB</small>
+                            <input id="ijazah" name="ijazah" type="file" accept="application/pdf,.pdf" required>
+                        </label>
+                    </div>
+                    <div class="upload-card">
+                        <div class="upload-title"><strong>Surat Keterangan Lulus (SKL)</strong><span>PDF</span></div>
+                        <label class="upload-area" for="skl">
+                            <span class="upload-icon">⇧</span>
+                            <strong id="skl-name">Unggah Berkas SKL</strong>
+                            <small>Maksimal ukuran 2MB</small>
+                            <input id="skl" name="skl" type="file" accept="application/pdf,.pdf" required>
+                        </label>
+                    </div>
+                    <p class="error file-error" th:if="${pesanFile}" th:text="${pesanFile}"></p>
+                </div>
+            </section>
+
+            <div class="consent-row">
+                <input id="persetujuan" type="checkbox" th:field="*{persetujuan}" value="setuju" required>
+                <label for="persetujuan">Saya menyatakan data yang saya isi adalah benar dan sesuai dengan kenyataannya.</label>
+            </div>
+            <small class="error consent-error" th:errors="*{persetujuan}"></small>
+
+            <button class="submit-button" type="submit">Daftar <span>→</span></button>
+            <p class="privacy-note">Ini merupakan simulasi formulir. Berkas yang dipilih tidak disimpan ke server.</p>
+        </form>
+    </main>
+</div>
+<script>
+    function showFileName(inputId, labelId, defaultText) {
+        const input = document.getElementById(inputId);
+        const label = document.getElementById(labelId);
+        input.addEventListener("change", () => {
+            label.textContent = input.files.length ? input.files[0].name : defaultText;
+        });
+    }
+    showFileName("ijazah", "ijazah-name", "Unggah Berkas Ijazah");
+    showFileName("skl", "skl-name", "Unggah Berkas SKL");
+</script>
+</body>
+</html>
